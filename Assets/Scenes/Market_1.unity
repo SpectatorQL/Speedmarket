@@ -150,6 +150,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4557af679ab5f4479ee5043d3452f0b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Sprint: 1000
+  SprintMax: 1000
+  CooldownSecs: 2
+  NextSprint: 0
 --- !u!20 &519420031
 Camera:
   m_ObjectHideFlags: 0

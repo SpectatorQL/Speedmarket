@@ -14,8 +14,6 @@ namespace Speedmarket
 
         void Update()
         {
-            Debug.Log(CooldownSecs);
-
             _controller.OldInput = _controller.NewInput;
             _controller.NewInput = new PlayerInput();
             

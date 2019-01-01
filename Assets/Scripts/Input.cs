@@ -71,7 +71,7 @@ namespace Speedmarket
                     }
                 }
             }
-            Debug.Log("Sprint: " + ent.Sprint);
+            // Debug.Log("Sprint: " + ent.Sprint);
             
             Vector3 pos = ent.transform.position;
             if(controller.NewInput.WDown)

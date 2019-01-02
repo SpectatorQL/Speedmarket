@@ -14,9 +14,18 @@ namespace Speedmarket
 
         int _score;
 
+        UI _ui;
+
         public void UpdateScore(int val)
         {
             _score += val;
+            _ui.UpdateScoreDisplay(_score);
+        }
+
+        void Start()
+        {
+            _ui = FindObjectOfType<UI>();
+            _ui.UpdateScoreDisplay(0);
         }
 
         void Update()

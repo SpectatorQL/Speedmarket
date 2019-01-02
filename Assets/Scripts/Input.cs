@@ -73,6 +73,7 @@ namespace Speedmarket
             }
             // Debug.Log("Sprint: " + ent.Sprint);
             
+            // TODO: Use physics.
             Vector3 pos = ent.transform.position;
             if(controller.NewInput.WDown)
             {
@@ -91,10 +92,6 @@ namespace Speedmarket
                 pos += ent.transform.right * dtSpeed;
             }
             ent.transform.position = pos;
-        }
-
-        public static void ProcessMouse(PlayerEntity ent, PlayerController controller)
-        {
         }
     }
 }

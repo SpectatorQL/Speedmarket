@@ -4,6 +4,10 @@ using UnityEngine;
 
 namespace Speedmarket
 {
+    /*
+        NOTE(SpectatorQL): Manage state in a seperate manager object?
+        TODO: Rework all the state processing and UI updating so that they use callbacks.
+    */
     public class PlayerEntity : MonoBehaviour
     {
         PlayerController _controller = new PlayerController();
@@ -19,13 +23,14 @@ namespace Speedmarket
         public void UpdateScore(int val)
         {
             _score += val;
-            _ui.UpdateScoreDisplay(_score);
+            _ui.UpdateScoreText(_score);
         }
 
         void Start()
         {
             _ui = FindObjectOfType<UI>();
-            _ui.UpdateScoreDisplay(0);
+            _ui.UpdateScoreText(0);
+            _ui.UpdateSprintBar(Sprint);
         }
 
         void Update()
@@ -65,6 +70,8 @@ namespace Speedmarket
             }
 
             PlayerInput.ProcessKeyboard(this, _controller);
+
+            _ui.UpdateSprintBar(Sprint);
         }
     }
 }

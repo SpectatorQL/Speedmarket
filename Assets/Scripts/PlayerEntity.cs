@@ -12,6 +12,13 @@ namespace Speedmarket
         [HideInInspector] public float CooldownSecs = 2.0f;
         [HideInInspector] public float NextSprint = 0.0f;
 
+        int _score;
+
+        public void UpdateScore(int val)
+        {
+            _score += val;
+        }
+
         void Update()
         {
             _controller.OldInput = _controller.NewInput;

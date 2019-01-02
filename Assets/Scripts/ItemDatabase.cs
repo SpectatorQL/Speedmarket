@@ -9,6 +9,7 @@ namespace Speedmarket
     [Serializable]
     public class Item
     {
+        public string Name;
         public int Value;
         public Sprite Sprite;
         public Category Category;
@@ -45,6 +46,7 @@ namespace Speedmarket
                 foreach(var worldItem in category)
                 {
                     int i = _rand.Next(categoryItems.Length);
+                    worldItem.Value = categoryItems[i].Value;
                     worldItem.Renderer.sprite = categoryItems[i].Sprite;
                 }
             }

@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 212744924815945730}
   - component: {fileID: 61973498492338110}
   - component: {fileID: 114213474810932792}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: WorldItem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -51,7 +51,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -78,6 +78,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2410c34ed1237c4d842e1e6612fc37d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Value: 0
   Category: -1
   Renderer: {fileID: 0}
 --- !u!212 &212744924815945730

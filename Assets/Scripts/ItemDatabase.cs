@@ -31,25 +31,5 @@ namespace Speedmarket
     public class ItemDatabase : MonoBehaviour
     {
         public Item[] Items;
-        static System.Random _rand = new System.Random();
-
-        void Start()
-        {
-            var objs = FindObjectsOfType<WorldItem>()
-                .OrderBy(item => item)
-                .GroupBy(item => { return item.Category; });
-            foreach(var category in objs)
-            {
-                Item[] categoryItems = Items
-                    .Where(item => item.Category == category.Key)
-                    .ToArray();
-                foreach(var worldItem in category)
-                {
-                    int i = _rand.Next(categoryItems.Length);
-                    worldItem.Value = categoryItems[i].Value;
-                    worldItem.Renderer.sprite = categoryItems[i].Sprite;
-                }
-            }
-        }
     }
 }

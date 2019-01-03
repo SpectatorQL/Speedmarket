@@ -11,6 +11,8 @@ namespace Speedmarket
         public Category Category;
         [HideInInspector] public SpriteRenderer Renderer;
 
+        public Action<int> OnPickup;
+
         bool _triggered;
 
         public int CompareTo(WorldItem other)
@@ -34,16 +36,10 @@ namespace Speedmarket
             if(_triggered)
                 return;
 
-            other.gameObject.GetComponent<PlayerEntity>()
-                .UpdateScore(Value);
+            OnPickup(Value);
 
-            Destroy(gameObject);
+            gameObject.SetActive(false);
             _triggered = true;
-        }
-
-        void Start()
-        {
-            Renderer = GetComponent<SpriteRenderer>();
         }
     }
 }

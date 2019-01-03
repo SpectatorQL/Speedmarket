@@ -70,7 +70,7 @@ namespace Speedmarket
                         }
                     }
 
-                    ent.UpdateSprint();
+                    ent.OnSprintUpdate(ent.Sprint);
                 }
             }
             // Debug.Log("Sprint: " + ent.Sprint);

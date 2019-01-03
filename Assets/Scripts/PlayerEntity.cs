@@ -5,10 +5,6 @@ using UnityEngine;
 
 namespace Speedmarket
 {
-    /*
-        NOTE(SpectatorQL): Manage state in a seperate manager object?
-        TODO: Rework all the state processing and UI updating so that they use callbacks.
-    */
     public class PlayerEntity : MonoBehaviour
     {
         [HideInInspector] public int Sprint = 1000;

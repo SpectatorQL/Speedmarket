@@ -23,7 +23,7 @@ namespace Speedmarket
         public bool SDown;
         public bool ADown;
         public bool DDown;
-
+        // TODO: Switch to a different key.
         public bool FDown;
         public bool FUp;
 
@@ -31,7 +31,7 @@ namespace Speedmarket
         
         public static void ProcessKeyboard(PlayerEntity ent, PlayerController controller)
         {
-            float speed = 1.0f;
+            float speed = 50.0f;
             float dtSpeed = speed * Time.deltaTime;
             if(controller.NewInput.Debug_LShift)
             {
@@ -41,7 +41,7 @@ namespace Speedmarket
             // TODO: Disable sprinting if the character is not moving during the current frame.
             float time = Time.time;
             int sprintModifier = 4;
-            float sprintValue = 3.0f;
+            float sprintMultiplier = 2.0f;
             if((time - ent.NextSprint) > 0)
             {
                 if(controller.NewInput.FUp)
@@ -54,7 +54,7 @@ namespace Speedmarket
                     {
                         if(ent.Sprint > 0)
                         {
-                            dtSpeed *= sprintValue;
+                            dtSpeed *= sprintMultiplier;
                             ent.Sprint -= sprintModifier;
                         }
                         else
@@ -69,29 +69,31 @@ namespace Speedmarket
                             ent.Sprint += sprintModifier;
                         }
                     }
+
+                    ent.UpdateSprint();
                 }
             }
             // Debug.Log("Sprint: " + ent.Sprint);
             
-            // TODO: Use physics.
-            Vector3 pos = ent.transform.position;
+            Vector2 velocity = new Vector2();
+            var body = ent.GetComponent<Rigidbody2D>();
             if(controller.NewInput.WDown)
             {
-                pos += ent.transform.up * dtSpeed;
+                velocity.y = dtSpeed;
             }
             if(controller.NewInput.SDown)
             {
-                pos -= ent.transform.up * dtSpeed;
+                velocity.y = -dtSpeed;
             }
             if(controller.NewInput.ADown)
             {
-                pos -= ent.transform.right * dtSpeed;
+                velocity.x = -dtSpeed;
             }
             if(controller.NewInput.DDown)
             {
-                pos += ent.transform.right * dtSpeed;
+                velocity.x = dtSpeed;
             }
-            ent.transform.position = pos;
+            body.velocity = velocity;
         }
     }
 }

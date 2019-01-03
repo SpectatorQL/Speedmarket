@@ -26,6 +26,11 @@ namespace Speedmarket
             _ui.UpdateScoreText(_score);
         }
 
+        public void UpdateSprint()
+        {
+            _ui.UpdateSprintBar(Sprint);
+        }
+
         void Start()
         {
             _ui = FindObjectOfType<UI>();
@@ -70,8 +75,6 @@ namespace Speedmarket
             }
 
             PlayerInput.ProcessKeyboard(this, _controller);
-
-            _ui.UpdateSprintBar(Sprint);
         }
     }
 }

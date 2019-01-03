@@ -133,7 +133,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!58 &58606110347995994
 CircleCollider2D:
   m_ObjectHideFlags: 1
@@ -171,7 +171,6 @@ MonoBehaviour:
   SprintMax: 1000
   CooldownSecs: 2
   NextSprint: 0
-  Score: 0
 --- !u!212 &212193363478648064
 SpriteRenderer:
   m_ObjectHideFlags: 1

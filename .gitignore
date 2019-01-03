@@ -36,9 +36,6 @@ sysinfo.txt
 *.apk
 *.unitypackage
 
-# Local .gitconfig
+# Locals
 .gitconfig
-
-# RPOverlord
-*.orig
-*.orig.*
+*.diff

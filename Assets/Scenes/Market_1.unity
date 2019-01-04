@@ -1978,7 +1978,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _scoreText: {fileID: 647833494}
+  _timeText: {fileID: 2101567630}
   _sprintSlider: {fileID: 1779782978}
+  _pauseMenu: {fileID: 901256278}
 --- !u!1001 &1732588838
 Prefab:
   m_ObjectHideFlags: 0

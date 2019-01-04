@@ -12,6 +12,12 @@ namespace Speedmarket
 
         int _score;
 
+        float _timeLimit = 60.0f;
+        float _timeLeft;
+        bool _outOfTime;
+
+        bool _paused;
+
         UI _ui;
 
         static System.Random _rand = new System.Random();
@@ -25,6 +31,33 @@ namespace Speedmarket
         public void UpdateSprint(int val)
         {
             _ui.UpdateSprintBar(val);
+        }
+
+        public void UpdateTime(float val)
+        {
+            _ui.UpdateTime(val);
+        }
+
+        void OnPause()
+        {
+            if(_paused)
+            {
+                _ui.HidePauseMenu();
+                _paused = false;
+                Time.timeScale = 1;
+            }
+            else
+            {
+                _ui.ShowPauseMenu();
+                _paused = true;
+                Time.timeScale = 0;
+            }
+        }
+
+        bool IsPaused()
+        {
+            bool result = _paused;
+            return result;
         }
 
         void Start()
@@ -59,11 +92,15 @@ namespace Speedmarket
 
             _player = FindObjectOfType<PlayerEntity>();
             _player.OnSprintUpdate = UpdateSprint;
+            _player.OnPause = OnPause;
+            _player.IsPaused = IsPaused;
 
 
             _ui = FindObjectOfType<UI>();
             _ui.UpdateScoreText(0);
             _ui.UpdateSprintBar(_player.Sprint);
+
+            _timeLeft = _timeLimit;
         }
         
         void Update()
@@ -97,12 +134,28 @@ namespace Speedmarket
                 _playerController.NewInput.FUp = true;
             }
 
+            if(Input.GetKeyDown(KeyCode.P))
+            {
+                _playerController.NewInput.PDown = true;
+            }
+
             if(Input.GetKey(KeyCode.LeftShift))
             {
                 _playerController.NewInput.Debug_LShift = true;
             }
 
             PlayerInput.ProcessKeyboard(_player, _playerController);
+
+
+            UpdateTime(_timeLeft);
+
+            _timeLeft -= Time.deltaTime;
+            if(_timeLeft <= 0)
+            {
+                Time.timeScale = 0;
+                _outOfTime = true;
+                // TODO: End level.
+            }
         }
     }
 }

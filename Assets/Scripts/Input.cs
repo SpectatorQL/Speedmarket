@@ -27,10 +27,21 @@ namespace Speedmarket
         public bool FDown;
         public bool FUp;
 
+        public bool PDown;
+
         public bool Debug_LShift;
         
+        // TODO: Rethink the whole approach to input processing.
         public static void ProcessKeyboard(PlayerEntity ent, PlayerController controller)
         {
+            if(controller.NewInput.PDown)
+            {
+                ent.OnPause();
+            }
+
+            if(ent.IsPaused())
+                return;
+
             float speed = 50.0f;
             float dtSpeed = speed * Time.deltaTime;
             if(controller.NewInput.Debug_LShift)
@@ -39,6 +50,7 @@ namespace Speedmarket
             }
 
             // TODO: Disable sprinting if the character is not moving during the current frame.
+            // TODO: If the player pauses the game while pressing F the cooldown never triggers. Gotta fix this.
             float time = Time.time;
             int sprintModifier = 4;
             float sprintMultiplier = 2.0f;

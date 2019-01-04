@@ -13,5 +13,7 @@ namespace Speedmarket
         [HideInInspector] public float NextSprint = 0.0f;
 
         public Action<int> OnSprintUpdate;
+        public Action OnPause;
+        public Func<bool> IsPaused;
     }
 }

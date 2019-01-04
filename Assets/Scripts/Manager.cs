@@ -66,23 +66,31 @@ namespace Speedmarket
             var s = new System.Diagnostics.Stopwatch();
             s.Start();
 
-            var itemDatabase = FindObjectOfType<ItemDatabase>().Items;
-            var objs = FindObjectsOfType<WorldItem>()
+            var itemDatabase = FindObjectOfType<ItemDatabase>();
+            Item[][] items = new Item[][]
+            {
+                itemDatabase.Invalid,
+                itemDatabase.General
+            };
+
+            var spawnPoints = FindObjectsOfType<WorldItem>()
                 .OrderBy(item => item)
                 .GroupBy(item => { return item.Category; });
-            foreach(var category in objs)
+
+            int i = 0;
+            foreach(var category in spawnPoints)
             {
-                Item[] categoryItems = itemDatabase
-                    .Where(item => item.Category == category.Key)
-                    .ToArray();
+                int catIdx = (int)category.Key;
+                Item[] categoryItems = items[catIdx];
                 foreach(var worldItem in category)
                 {
-                    int i = _rand.Next(categoryItems.Length);
-                    worldItem.Value = categoryItems[i].Value;
+                    int j = _rand.Next(categoryItems.Length);
+                    worldItem.Value = categoryItems[j].Value;
                     worldItem.Renderer = worldItem.gameObject.GetComponent<SpriteRenderer>();
-                    worldItem.Renderer.sprite = categoryItems[i].Sprite;
+                    worldItem.Renderer.sprite = categoryItems[j].Sprite;
                     worldItem.OnPickup = UpdateScore;
                 }
+                ++i;
             }
 
             s.Stop();

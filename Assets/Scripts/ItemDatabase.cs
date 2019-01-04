@@ -12,12 +12,11 @@ namespace Speedmarket
         public string Name;
         public int Value;
         public Sprite Sprite;
-        public Category Category;
     }
 
     public enum Category
     {
-        Invalid = -1,
+        Invalid,
         General,
         Food,
         Fashion,
@@ -30,6 +29,7 @@ namespace Speedmarket
 
     public class ItemDatabase : MonoBehaviour
     {
-        public Item[] Items;
+        public Item[] Invalid;
+        public Item[] General;
     }
 }

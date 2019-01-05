@@ -31,7 +31,7 @@ namespace Speedmarket
 
         public bool Debug_LShift;
         
-        // TODO: Rethink the whole approach to input processing.
+        // TODO: Rework the input processing code.
         public static void ProcessKeyboard(PlayerEntity ent, PlayerController controller)
         {
             if(controller.NewInput.PDown)

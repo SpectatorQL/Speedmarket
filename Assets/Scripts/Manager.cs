@@ -62,40 +62,43 @@ namespace Speedmarket
 
         void Start()
         {
-            // TODO: Use separate arrays for each category?
-            var s = new System.Diagnostics.Stopwatch();
-            s.Start();
-
-            var itemDatabase = FindObjectOfType<ItemDatabase>();
-            Item[][] items = new Item[][]
-            {
-                itemDatabase.Invalid,
-                itemDatabase.General
-            };
+            Item[][] itemDatabase = FindObjectOfType<ItemDatabase>()
+                .GetDatabase();
 
             var spawnPoints = FindObjectsOfType<WorldItem>()
                 .OrderBy(item => item)
                 .GroupBy(item => { return item.Category; });
-
-            int i = 0;
+            
             foreach(var category in spawnPoints)
             {
                 int catIdx = (int)category.Key;
-                Item[] categoryItems = items[catIdx];
-                foreach(var worldItem in category)
-                {
-                    int j = _rand.Next(categoryItems.Length);
-                    worldItem.Value = categoryItems[j].Value;
-                    worldItem.Renderer = worldItem.gameObject.GetComponent<SpriteRenderer>();
-                    worldItem.Renderer.sprite = categoryItems[j].Sprite;
-                    worldItem.OnPickup = UpdateScore;
-                }
-                ++i;
-            }
+                Item[] categoryItems = itemDatabase[catIdx];
 
-            s.Stop();
-            string str = string.Format("{0}ms, {1}ticks", s.ElapsedMilliseconds, s.Elapsed.Ticks);
-            Debug.Log(str);
+                if(categoryItems.Length != 0)
+                {
+                    foreach(var worldItem in category)
+                    {
+                        int j = _rand.Next(categoryItems.Length);
+                        worldItem.Value = categoryItems[j].Value;
+                        worldItem.Renderer = worldItem.gameObject
+                            .GetComponent<SpriteRenderer>();
+                        worldItem.Renderer.sprite = categoryItems[j].Sprite;
+                        worldItem.OnPickup = UpdateScore;
+                    }
+                }
+                else
+                {
+                    Item invalidItem = itemDatabase[0][0];
+                    foreach(var worldItem in category)
+                    {
+                        worldItem.Value = invalidItem.Value;
+                        worldItem.Renderer = worldItem.gameObject
+                            .GetComponent<SpriteRenderer>();
+                        worldItem.Renderer.sprite = invalidItem.Sprite;
+                        worldItem.OnPickup = UpdateScore;
+                    }
+                }
+            }
 
 
             _player = FindObjectOfType<PlayerEntity>();

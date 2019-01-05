@@ -24,12 +24,34 @@ namespace Speedmarket
         Footwear,
         Perfumes,
         Pharmaceuticals,
-        Mail,
     }
 
     public class ItemDatabase : MonoBehaviour
     {
-        public Item[] Invalid;
-        public Item[] General;
+        [SerializeField] Item[] _invalid;
+        [SerializeField] Item[] _general;
+        [SerializeField] Item[] _food;
+        [SerializeField] Item[] _fashion;
+        [SerializeField] Item[] _sportswear;
+        [SerializeField] Item[] _footwear;
+        [SerializeField] Item[] _perfumes;
+        [SerializeField] Item[] _pharmaceuticals;
+
+        public Item[][] GetDatabase()
+        {
+            Item[][] db =
+            {
+                _invalid,
+                _general,
+                _food,
+                _fashion,
+                _sportswear,
+                _footwear,
+                _perfumes,
+                _pharmaceuticals,
+            };
+
+            return db;
+        }
     }
 }

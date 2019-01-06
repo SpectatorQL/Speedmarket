@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Speedmarket
 {
@@ -38,7 +39,7 @@ namespace Speedmarket
             _ui.UpdateTime(val);
         }
 
-        void OnPause()
+        public void OnPause()
         {
             if(_paused)
             {
@@ -58,6 +59,20 @@ namespace Speedmarket
         {
             bool result = _paused;
             return result;
+        }
+
+        public void QuitToMainMenu()
+        {
+            SceneManager.LoadSceneAsync(0);
+        }
+
+        public static void QuitApplication()
+        {
+#if UNITY_EDITOR
+            UnityEditor.EditorApplication.isPlaying = false;
+#else
+            Application.Quit();
+#endif
         }
 
         void Start()

@@ -63,5 +63,10 @@ namespace Speedmarket
         {
             _pauseMenu.SetActive(false);
         }
+        
+        public void QuitGame()
+        {
+            Manager.QuitApplication();
+        }
     }
 }

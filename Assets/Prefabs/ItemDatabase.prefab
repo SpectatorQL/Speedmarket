@@ -53,16 +53,51 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _invalid:
   - Name: NULL
-    Value: 0
-    Sprite: {fileID: 21300000, guid: 66770a3ad1f0a964f980449569e62dc2, type: 3}
+    Value: -1
+    Sprite: {fileID: 21300000, guid: 596cd28a5ea87bb4ea6815b3121bb11d, type: 3}
   _general:
-  - Name: DEBUG_100
+  - Name: General_100
     Value: 100
-    Sprite: {fileID: 21300000, guid: 66770a3ad1f0a964f980449569e62dc2, type: 3}
-  _food: []
+    Sprite: {fileID: 21300000, guid: 3487dc2d8a9f63e41aa375b221ed8e82, type: 3}
+  - Name: General_200
+    Value: 200
+    Sprite: {fileID: 21300000, guid: f6f25b00ef84d9248a901d87a7ce076e, type: 3}
+  _food:
+  - Name: Food_100
+    Value: 100
+    Sprite: {fileID: 21300000, guid: 7cdb35a7ee8406a40846d9ec2a2c0756, type: 3}
+  - Name: Food_200
+    Value: 200
+    Sprite: {fileID: 21300000, guid: d649621a525b5af4ca15de352c08c675, type: 3}
+  - Name: Food_1000
+    Value: 1000
+    Sprite: {fileID: 21300000, guid: 5b151479083894e40a51368d7609b5c4, type: 3}
   _fashion: []
-  _sportswear: []
-  _footwear: []
-  _perfumes: []
-  _pharmaceuticals: []
-  _mail: []
+  _sportswear:
+  - Name: Sportswear_100
+    Value: 100
+    Sprite: {fileID: 21300000, guid: ed0eb1375a382f344bafb7ccaccac00a, type: 3}
+  - Name: Sportswear_200
+    Value: 200
+    Sprite: {fileID: 21300000, guid: 4c008af0741c2d442a86082842366331, type: 3}
+  _footwear:
+  - Name: Footwear_100
+    Value: 100
+    Sprite: {fileID: 21300000, guid: 0d4e3663fa39a394b9ffa4bccb12cc81, type: 3}
+  - Name: Footwear_200
+    Value: 200
+    Sprite: {fileID: 21300000, guid: 2d3214565896ffc4db9263a06c04f7e3, type: 3}
+  _perfumes:
+  - Name: Perfumes_100
+    Value: 100
+    Sprite: {fileID: 21300000, guid: f48732dbf232d6f46b3a57f1e4bdaeb2, type: 3}
+  - Name: Perfumes_200
+    Value: 200
+    Sprite: {fileID: 21300000, guid: 445f4cf8616f2c04c8b6ec1c18097b3c, type: 3}
+  _pharmaceuticals:
+  - Name: Pharma_100
+    Value: 100
+    Sprite: {fileID: 21300000, guid: c67757371c2a67649acddffa2adee6bf, type: 3}
+  - Name: Pharma_200
+    Value: 200
+    Sprite: {fileID: 21300000, guid: 608e877b6fc03cc42958698f9af1b5f0, type: 3}

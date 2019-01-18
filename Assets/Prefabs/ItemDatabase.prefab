@@ -72,7 +72,13 @@ MonoBehaviour:
   - Name: Food_1000
     Value: 1000
     Sprite: {fileID: 21300000, guid: 5b151479083894e40a51368d7609b5c4, type: 3}
-  _fashion: []
+  _fashion:
+  - Name: Fashion_100
+    Value: 100
+    Sprite: {fileID: 21300000, guid: aa31f03c70611d84693c93a61b15005f, type: 3}
+  - Name: Fashion_200
+    Value: 200
+    Sprite: {fileID: 21300000, guid: d2af30844ab9df24f81b3a539bc26092, type: 3}
   _sportswear:
   - Name: Sportswear_100
     Value: 100

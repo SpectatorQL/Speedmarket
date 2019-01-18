@@ -34,6 +34,13 @@ namespace Speedmarket
         // TODO: Rework the input processing code.
         public static void ProcessKeyboard(PlayerEntity ent, PlayerController controller)
         {
+            var state = ent.State;
+
+            if(state == PlayerState.Walking)
+            {
+
+            }
+
             if(controller.NewInput.PDown)
             {
                 ent.OnPause();

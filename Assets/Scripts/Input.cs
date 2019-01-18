@@ -19,100 +19,109 @@ namespace Speedmarket
         public bool LmbDown;
         public bool RmbDown;
 
-        public bool WDown;
-        public bool SDown;
-        public bool ADown;
-        public bool DDown;
-        // TODO: Switch to a different key.
-        public bool FDown;
-        public bool FUp;
+        public bool W;
+        public bool S;
+        public bool A;
+        public bool D;
+        public bool LShift;
+        public bool LShiftUp;
 
         public bool PDown;
-
-        public bool Debug_LShift;
         
-        // TODO: Rework the input processing code.
-        public static void ProcessKeyboard(PlayerEntity ent, PlayerController controller)
+        public static void ProcessKeyboard(PlayerEntity ent, PlayerController controller, bool gamePaused)
         {
-            var state = ent.State;
-
-            if(state == PlayerState.Walking)
-            {
-
-            }
-
-            if(controller.NewInput.PDown)
-            {
-                ent.OnPause();
-            }
-
-            if(ent.IsPaused())
-                return;
-
-            float speed = 50.0f;
-            float dtSpeed = speed * Time.deltaTime;
-            if(controller.NewInput.Debug_LShift)
-            {
-                dtSpeed *= 10.0f;
-            }
-
-            // TODO: Disable sprinting if the character is not moving during the current frame.
-            // TODO: If the player pauses the game while pressing F the cooldown never triggers. Gotta fix this.
             float time = Time.time;
-            int sprintModifier = 4;
-            float sprintMultiplier = 2.0f;
-            if((time - ent.NextSprint) > 0)
+
+            if(!gamePaused)
             {
-                if(controller.NewInput.FUp)
+                float speed = 50.0f;
+                float dtSpeed = speed * Time.deltaTime;
+
+                // TODO: Disable sprinting if the character is not moving during the current frame.
+                int sprintModifier = 4;
+                float sprintMultiplier = 2.0f;
+                if((time - ent.NextSprint) > 0)
                 {
-                    ent.NextSprint = time + ent.CooldownSecs;
-                }
-                else
-                {
-                    if(controller.NewInput.FDown)
+                    ent.Sprinting = false;
+
+                    if(controller.NewInput.LShiftUp)
                     {
-                        if(ent.Sprint > 0)
-                        {
-                            dtSpeed *= sprintMultiplier;
-                            ent.Sprint -= sprintModifier;
-                        }
-                        else
-                        {
-                            ent.NextSprint = time + ent.CooldownSecs;
-                        }
+                        ent.NextSprint = time + ent.CooldownSecs;
                     }
                     else
                     {
-                        if(ent.Sprint != ent.SprintMax)
+                        if(controller.NewInput.LShift)
                         {
-                            ent.Sprint += sprintModifier;
+                            if(ent.Sprint > 0)
+                            {
+                                dtSpeed *= sprintMultiplier;
+                                ent.Sprint -= sprintModifier;
+                                ent.Sprinting = true;
+                            }
+                            else
+                            {
+                                ent.NextSprint = time + ent.CooldownSecs;
+                            }
                         }
-                    }
+                        else
+                        {
+                            if(ent.Sprint != ent.SprintMax)
+                            {
+                                ent.Sprint += sprintModifier;
+                            }
+                        }
 
-                    ent.OnSprintUpdate(ent.Sprint);
+                        ent.OnSprintUpdate(ent.Sprint);
+                    }
+                }
+
+
+                Vector2 velocity = new Vector2();
+                var body = ent.GetComponent<Rigidbody2D>();
+                if(controller.NewInput.W)
+                {
+                    velocity.y = dtSpeed;
+                }
+                if(controller.NewInput.S)
+                {
+                    velocity.y = -dtSpeed;
+                }
+                if(controller.NewInput.A)
+                {
+                    velocity.x = -dtSpeed;
+                }
+                if(controller.NewInput.D)
+                {
+                    velocity.x = dtSpeed;
+                }
+                body.velocity = velocity;
+
+
+                if(controller.NewInput.PDown)
+                {
+                    ent.OnPause();
                 }
             }
-            // Debug.Log("Sprint: " + ent.Sprint);
-            
-            Vector2 velocity = new Vector2();
-            var body = ent.GetComponent<Rigidbody2D>();
-            if(controller.NewInput.WDown)
+            else
             {
-                velocity.y = dtSpeed;
+                if(controller.NewInput.PDown)
+                {
+                    if((time - ent.NextSprint) <= 0)
+                    {
+                        ent.OnPause();
+                    }
+                    else
+                    {
+                        if(!controller.NewInput.LShift
+                            && ent.Sprinting)
+                        {
+                            ent.NextSprint = time + ent.CooldownSecs;
+                        }
+
+                        ent.OnPause();
+                    }
+                }
             }
-            if(controller.NewInput.SDown)
-            {
-                velocity.y = -dtSpeed;
-            }
-            if(controller.NewInput.ADown)
-            {
-                velocity.x = -dtSpeed;
-            }
-            if(controller.NewInput.DDown)
-            {
-                velocity.x = dtSpeed;
-            }
-            body.velocity = velocity;
         }
     }
 }

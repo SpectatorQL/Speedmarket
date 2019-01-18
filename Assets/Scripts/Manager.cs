@@ -55,12 +55,6 @@ namespace Speedmarket
             }
         }
 
-        bool IsPaused()
-        {
-            bool result = _paused;
-            return result;
-        }
-
         public void QuitToMainMenu()
         {
             SceneManager.LoadSceneAsync(0);
@@ -119,7 +113,6 @@ namespace Speedmarket
             _player = FindObjectOfType<PlayerEntity>();
             _player.OnSprintUpdate = UpdateSprint;
             _player.OnPause = OnPause;
-            _player.IsPaused = IsPaused;
 
 
             _ui = FindObjectOfType<UI>();
@@ -136,28 +129,28 @@ namespace Speedmarket
 
             if(Input.GetKey(KeyCode.W))
             {
-                _playerController.NewInput.WDown = true;
+                _playerController.NewInput.W = true;
             }
             if(Input.GetKey(KeyCode.S))
             {
-                _playerController.NewInput.SDown = true;
+                _playerController.NewInput.S = true;
             }
             if(Input.GetKey(KeyCode.A))
             {
-                _playerController.NewInput.ADown = true;
+                _playerController.NewInput.A = true;
             }
             if(Input.GetKey(KeyCode.D))
             {
-                _playerController.NewInput.DDown = true;
+                _playerController.NewInput.D = true;
             }
 
-            if(Input.GetKey(KeyCode.F))
+            if(Input.GetKey(KeyCode.LeftShift))
             {
-                _playerController.NewInput.FDown = true;
+                _playerController.NewInput.LShift = true;
             }
-            if(Input.GetKeyUp(KeyCode.F))
+            if(Input.GetKeyUp(KeyCode.LeftShift))
             {
-                _playerController.NewInput.FUp = true;
+                _playerController.NewInput.LShiftUp = true;
             }
 
             if(Input.GetKeyDown(KeyCode.P))
@@ -165,12 +158,7 @@ namespace Speedmarket
                 _playerController.NewInput.PDown = true;
             }
 
-            if(Input.GetKey(KeyCode.LeftShift))
-            {
-                _playerController.NewInput.Debug_LShift = true;
-            }
-
-            PlayerInput.ProcessKeyboard(_player, _playerController);
+            PlayerInput.ProcessKeyboard(_player, _playerController, _paused);
 
 
             UpdateTime(_timeLeft);

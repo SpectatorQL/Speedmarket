@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 
 namespace Speedmarket
 {
-    public class Manager : MonoBehaviour
+    public class GameLoop : MonoBehaviour
     {
         PlayerEntity _player;
         PlayerController _playerController = new PlayerController();
@@ -15,7 +15,6 @@ namespace Speedmarket
 
         float _timeLimit = 60.0f;
         float _timeLeft;
-        bool _outOfTime;
 
         bool _paused;
 
@@ -167,7 +166,7 @@ namespace Speedmarket
             if(_timeLeft <= 0)
             {
                 Time.timeScale = 0;
-                _outOfTime = true;
+                _ui.ShowPauseMenu();
                 // TODO: End level.
             }
         }

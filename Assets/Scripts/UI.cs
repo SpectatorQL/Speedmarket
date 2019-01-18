@@ -66,7 +66,7 @@ namespace Speedmarket
         
         public void QuitGame()
         {
-            Manager.QuitApplication();
+            GameLoop.QuitApplication();
         }
     }
 }

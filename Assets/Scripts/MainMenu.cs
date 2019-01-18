@@ -34,7 +34,7 @@ namespace Speedmarket
 
         public void Exit()
         {
-            Manager.QuitApplication();
+            GameLoop.QuitApplication();
         }
 
         void Start()
